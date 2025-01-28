@@ -46,5 +46,15 @@
             android:name=".activities.RegisterActivity"
             android:exported="true" />
 
+        <!-- MenuActivity Activity -->
+        <activity
+            android:name=".activities.MenuActivity"
+            android:exported="true" />
+
+        <!-- UserListActivity Activity -->
+        <activity
+            android:name=".activities.UserListActivity"
+            android:exported="true" />
+
     </application>
 </manifest>

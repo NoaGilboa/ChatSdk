@@ -44,8 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     User user = response.body();
                     Toast.makeText(LoginActivity.this, "Logged in as " + user.getUsername(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, ChatActivity.class);
-                    intent.putExtra("userId", user.getId());
+                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                    intent.putExtra("USER_ID", user.getId());
+                    intent.putExtra("USERNAME", username);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();

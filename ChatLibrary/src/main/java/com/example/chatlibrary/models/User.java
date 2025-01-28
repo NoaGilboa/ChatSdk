@@ -3,6 +3,7 @@ package com.example.chatlibrary.models;
 public class User {
     private String id;
     private String username;
+    private String passwordHash;
     private String avatarUrl;
     private String status;
 
@@ -36,5 +37,13 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }

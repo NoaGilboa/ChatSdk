@@ -6,7 +6,6 @@ public class Chat {
     private String username1;
     private String user2Id;
     private String username2;
-
     private String lastMessage;
 
     public String getId() {
