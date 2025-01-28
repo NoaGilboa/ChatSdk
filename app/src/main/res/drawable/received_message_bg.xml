@@ -1,0 +1,10 @@
+<!-- res/drawable/received_message_bg.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#E0E0E0" /> <!-- Light gray background -->
+    <corners android:radius="16dp" /> <!-- Rounded corners -->
+    <padding
+        android:top="8dp"
+        android:bottom="8dp"
+        android:left="12dp"
+        android:right="12dp" />
+</shape>

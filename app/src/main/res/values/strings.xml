@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ChatApp</string>
+    <string name="login_hint">Login</string>
+    <string name="register_hint">Register</string>
+    <string name="message_hint">Type a message</string>
+</resources>
