@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText etUsername, etPassword, etAvatarUrl;
+    private EditText etUsername, etPassword;
     private Button btnRegister;
 
     @Override
@@ -27,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
-        etAvatarUrl = findViewById(R.id.etAvatarUrl);
         btnRegister = findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(v -> registerUser());
@@ -36,9 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser() {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-        String avatarUrl = etAvatarUrl.getText().toString();
 
-        ChatSdk.getInstance().registerUser(username, password, avatarUrl, new Callback<User>() {
+        ChatSdk.getInstance().registerUser(username, password, new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {

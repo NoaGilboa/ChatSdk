@@ -18,8 +18,7 @@ public interface ChatApiService {
     // User APIs
     @POST("/users/register")
     Call<User> registerUser(@Query("username") String username,
-                            @Query("passwordHash") String passwordHash,
-                            @Query("avatarUrl") String avatarUrl);
+                            @Query("passwordHash") String passwordHash);
 
     @GET("/users/login")
     Call<User> loginUser(@Query("username") String username,

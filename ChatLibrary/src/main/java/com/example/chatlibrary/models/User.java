@@ -4,7 +4,6 @@ public class User {
     private String id;
     private String username;
     private String passwordHash;
-    private String avatarUrl;
     private String status;
 
     public String getId() {
@@ -21,14 +20,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public String getStatus() {

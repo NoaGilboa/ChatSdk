@@ -86,10 +86,12 @@ public class ChatActivity extends AppCompatActivity {
                         senderUser = response.body();
                     } else {
                         receiverUser = response.body();
+                        tvChatName.setText(receiverUser.getUsername());
+
                     }
-                    if (senderUser != null && receiverUser != null) {
-                        updateChatName();
-                    }
+//                    if (senderUser != null && receiverUser != null) {
+//                        updateChatName();
+//                    }
                 } else {
                     Toast.makeText(ChatActivity.this, "Failed to load user: "+ userId, Toast.LENGTH_SHORT).show();
                 }
@@ -107,12 +109,11 @@ public class ChatActivity extends AppCompatActivity {
         if (senderUser != null && receiverUser != null) {
             Log.d("ChatActivity", "senderUser: "+ senderUser.getUsername());
             Log.d("ChatActivity", "receiverUser: "+ receiverUser.getUsername());
-//            if (user1Id.equals(senderUser.getId())) {
+            if (user1Id.equals(senderUser.getId())) {
                 tvChatName.setText(receiverUser.getUsername());
-//            } else {
-//                tvChatName.setText(senderUser.getUsername());
-//            }
-        }
+            } else {
+                tvChatName.setText(senderUser.getUsername());
+            }        }
     }
 
     private void loadMessages() {

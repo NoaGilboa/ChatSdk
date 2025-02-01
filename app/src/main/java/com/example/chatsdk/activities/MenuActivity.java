@@ -94,8 +94,8 @@ public class MenuActivity extends AppCompatActivity {
                             intent.putExtra("user2Id", chat.getUser2Id());
                         }
                         else{
-                            intent.putExtra("user1Id", chat.getUser2Id());
-                            intent.putExtra("user2Id", currentUserId);
+                            intent.putExtra("user1Id", currentUserId);
+                            intent.putExtra("user2Id", chat.getUser1Id());
                         }
                         startActivity(intent);
                     }));
