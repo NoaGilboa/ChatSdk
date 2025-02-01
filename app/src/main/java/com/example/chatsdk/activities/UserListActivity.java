@@ -2,6 +2,7 @@ package com.example.chatsdk.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,16 +25,24 @@ public class UserListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
+    private String currentUserId;
+    private Handler handler = new Handler();
+    private Runnable usersUpdater;
+    private static final int USER_UPDATE_INTERVAL = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
+        currentUserId = getIntent().getStringExtra("USER_ID");
+        Log.d("UserListActivity", "currentUserId: "+currentUserId);
+
         recyclerView = findViewById(R.id.recyclerViewUsers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         loadUsers();
+        startUsersUpdater();
     }
 
     private void loadUsers() {
@@ -59,8 +68,25 @@ public class UserListActivity extends AppCompatActivity {
 
     private void onUserSelected(User user) {
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("userId", user.getId());
-        intent.putExtra("username", user.getUsername());
+        intent.putExtra("user1Id", currentUserId);
+        intent.putExtra("user2Id", user.getId());
         startActivity(intent);
+    }
+
+    private void startUsersUpdater() {
+        usersUpdater = new Runnable() {
+            @Override
+            public void run() {
+                loadUsers();
+                handler.postDelayed(this, USER_UPDATE_INTERVAL);
+            }
+        };
+        handler.post(usersUpdater);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(usersUpdater);
     }
 }

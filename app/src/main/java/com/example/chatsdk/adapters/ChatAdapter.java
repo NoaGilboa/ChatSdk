@@ -17,14 +17,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     private List<Chat> chats;
     private OnChatClickListener listener;
+    private String currentUsername;
 
     public interface OnChatClickListener {
         void onChatClick(Chat chat);
     }
 
-    public ChatAdapter(List<Chat> chats, OnChatClickListener listener) {
+    public ChatAdapter(List<Chat> chats, String currentUsername, OnChatClickListener listener) {
         this.chats = chats;
         this.listener = listener;
+        this.currentUsername=currentUsername;
     }
 
     @NonNull
@@ -37,7 +39,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         Chat chat = chats.get(position);
-        holder.tvChatName.setText(chat.getUsername2());
+        if(chat.getUsername2().equals(currentUsername))
+            holder.tvChatName.setText(chat.getUsername1());
+        else
+            holder.tvChatName.setText(chat.getUsername2());
         holder.tvLastMessage.setText(chat.getLastMessage());
         holder.itemView.setOnClickListener(v -> listener.onChatClick(chat));
     }
