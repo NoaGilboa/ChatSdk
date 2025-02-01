@@ -2,16 +2,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textColor="@color/white" />
 
     <!-- Welcome Text -->
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:text="Hi, User!"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textColor="@color/black"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/btnLogout"
+        android:layout_alignBottom="@id/btnLogout"
+        android:gravity="center"
+        android:layout_marginStart="16dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvWelcome"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray" />
 
     <!-- RecyclerView to display chats -->
     <androidx.recyclerview.widget.RecyclerView
@@ -20,7 +43,9 @@
         android:layout_height="0dp"
         android:layout_below="@id/tvWelcome"
         android:layout_above="@id/fabAddUsers"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="16dp"
+        android:paddingBottom="60dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <!-- Floating Action Button to add users -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,5 +56,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
-        android:contentDescription="Add Users" />
+        android:contentDescription="Add Users"
+        android:background="@drawable/ic_add"
+        app:tint="@color/white" />
 </RelativeLayout>

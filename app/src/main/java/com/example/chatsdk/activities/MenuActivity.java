@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatlibrary.ChatSdk;
 import com.example.chatlibrary.models.Chat;
+import com.example.chatlibrary.models.User;
 import com.example.chatsdk.R;
 import com.example.chatsdk.adapters.ChatAdapter;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -26,11 +29,11 @@ import retrofit2.Response;
 public class MenuActivity extends AppCompatActivity {
 
     private TextView tvWelcome;
+    private MaterialButton btnLogout;
     private RecyclerView rvChats;
     private FloatingActionButton fabAddUsers;
     private String currentUserId;
     private String currentUsername;
-
     private Handler handler = new Handler();
     private Runnable chatsUpdater;
     private static final int CHAT_UPDATE_INTERVAL = 3000;
@@ -43,6 +46,7 @@ public class MenuActivity extends AppCompatActivity {
         tvWelcome = findViewById(R.id.tvWelcome);
         rvChats = findViewById(R.id.rvChats);
         fabAddUsers = findViewById(R.id.fabAddUsers);
+        btnLogout = findViewById(R.id.btnLogout);
 
         // Get user details from the Intent
         currentUserId = getIntent().getStringExtra("USER_ID");
@@ -69,6 +73,9 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         startChatsUpdater();
+
+        btnLogout.setOnClickListener(v -> logoutUser());
+
     }
 
     private void loadChats() {
@@ -99,6 +106,27 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Chat>> call, Throwable t) {
+                Toast.makeText(MenuActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void logoutUser() {
+        ChatSdk.getInstance().logoutUser(currentUserId, new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MenuActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MenuActivity.this, "Logout failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(MenuActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
